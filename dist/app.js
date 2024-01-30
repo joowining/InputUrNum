@@ -8,11 +8,33 @@ const factorial = (inputNum) => {
 };
 const pageInput = document.querySelector('#input-number');
 const submitBtn = document.querySelector('#submit-button');
-let input;
 const resultSpace = document.querySelector('#result-space');
 const resultText = document.querySelector('#result-text');
 submitBtn === null || submitBtn === void 0 ? void 0 : submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    input = factorial(+pageInput.value);
-    resultText.innerHTML = input.toString();
+    let input;
+    let result;
+    input = pageInput.value;
+    if (validation(input)) {
+        result = factorial(+input);
+        resultText.innerHTML = result.toString();
+    }
 });
+const validation = (inputNum) => {
+    let transedNum = +inputNum;
+    if (isNaN(transedNum)) {
+        alert("Please input a number");
+        pageInput.value = '';
+        return false;
+    }
+    else {
+        if (transedNum > 10 || transedNum < 1) {
+            alert("Please input a number between 1 and 10");
+            pageInput.value = '';
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+};
