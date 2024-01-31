@@ -53,3 +53,34 @@ const validation = ( inputNum : string) : boolean => {
     }
   }
 }
+
+
+// 3. 랜덤한 숫자를 입력해서 결과값을 보여주는 랜덤 버튼 추가하기 
+// 3-1 임의의 숫자를 생성해서 factorial한 값을 반환하는 함수 정의
+const randomNum = (): number => {
+  let randInt: number;
+  let result: number;
+  randInt = Math.floor(Math.random()*11);
+  result = factorial(randInt);
+  return result;
+}
+
+// 3-2 랜덤 버튼 추가하기 
+let randBtn: HTMLElement;
+const randomBtn = () =>{
+  randBtn =  document.createElement('button');
+  const resultSpace = document.querySelector('#result-space');
+  resultSpace?.insertBefore(randBtn,resultText);
+
+  randBtn.innerHTML = 'Random';
+
+  // 3-3 랜덤 버튼에 이벤트 추가하기 
+  randBtn.addEventListener('click',()=>{
+    let randResult = randomNum();
+    resultText.innerHTML = randResult.toString();
+  });
+
+}
+
+randomBtn();
+

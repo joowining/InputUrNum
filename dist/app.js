@@ -38,3 +38,22 @@ const validation = (inputNum) => {
         }
     }
 };
+const randomNum = () => {
+    let randInt;
+    let result;
+    randInt = Math.floor(Math.random() * 11);
+    result = factorial(randInt);
+    return result;
+};
+let randBtn;
+const randomBtn = () => {
+    randBtn = document.createElement('button');
+    const resultSpace = document.querySelector('#result-space');
+    resultSpace === null || resultSpace === void 0 ? void 0 : resultSpace.insertBefore(randBtn, resultText);
+    randBtn.innerHTML = 'Random';
+    randBtn.addEventListener('click', () => {
+        let randResult = randomNum();
+        resultText.innerHTML = randResult.toString();
+    });
+};
+randomBtn();
