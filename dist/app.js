@@ -17,7 +17,7 @@ submitBtn === null || submitBtn === void 0 ? void 0 : submitBtn.addEventListener
     input = pageInput.value;
     if (validation(input)) {
         result = factorial(+input);
-        resultText.innerHTML = result.toString();
+        addResult(result);
     }
 });
 const validation = (inputNum) => {
@@ -48,12 +48,19 @@ const randomNum = () => {
 let randBtn;
 const randomBtn = () => {
     randBtn = document.createElement('button');
-    const resultSpace = document.querySelector('#result-space');
-    resultSpace === null || resultSpace === void 0 ? void 0 : resultSpace.insertBefore(randBtn, resultText);
+    const formTag = document.querySelector('form');
+    formTag === null || formTag === void 0 ? void 0 : formTag.appendChild(randBtn);
     randBtn.innerHTML = 'Random';
-    randBtn.addEventListener('click', () => {
+    randBtn.addEventListener('click', (event) => {
+        event.preventDefault();
         let randResult = randomNum();
-        resultText.innerHTML = randResult.toString();
+        addResult(randResult);
     });
 };
 randomBtn();
+const addResult = (value) => {
+    let inHTML = value.toString();
+    let myh1 = document.createElement('h1');
+    myh1.innerHTML = inHTML;
+    resultSpace.appendChild(myh1);
+};

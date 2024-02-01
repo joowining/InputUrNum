@@ -30,7 +30,7 @@ submitBtn?.addEventListener('click',(event) =>{
   input = pageInput.value;
   if(validation(input)){
     result = factorial(+input); 
-    resultText.innerHTML = result.toString();
+    addResult(result);
   }
 });
 
@@ -69,18 +69,30 @@ const randomNum = (): number => {
 let randBtn: HTMLElement;
 const randomBtn = () =>{
   randBtn =  document.createElement('button');
-  const resultSpace = document.querySelector('#result-space');
-  resultSpace?.insertBefore(randBtn,resultText);
+  const formTag = document.querySelector('form');
+  formTag?.appendChild(randBtn);
 
   randBtn.innerHTML = 'Random';
 
   // 3-3 랜덤 버튼에 이벤트 추가하기 
-  randBtn.addEventListener('click',()=>{
+  randBtn.addEventListener('click',(event)=>{
+    event.preventDefault();
     let randResult = randomNum();
-    resultText.innerHTML = randResult.toString();
+    addResult(randResult);
   });
 
 }
 
 randomBtn();
 
+// 4. 숫자를 입력할 때 마다 입력한 내용 보여주기
+// + submit, random 버튼을 누를 때마다 하위 항목에 innerHTML의 결과값까지 해서 
+// + 밑에 새로운 element로 추가해주기 
+// 4-1 innerHTML에 넣을 값을 value로 받아서 appendChild해주는 함수 정의 
+const addResult = (value: number): void =>{
+  let inHTML = value.toString();
+  let myh1 = document.createElement('h1');
+  myh1.innerHTML = inHTML;
+  resultSpace.appendChild(myh1);
+};
+// 4-2 이 함수를 위의 submit 과 random 버튼의 결과값 입력에 사용
